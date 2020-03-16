@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import tabula
 import datetime
 import pandas as pd
