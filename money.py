@@ -37,7 +37,9 @@ class pdf:
                     print(df.iloc[u]['index'], dates[0], dates[1], df.loc[u, "Label"], self.getAmount(df.iloc[u]))
                     df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[u, "Label"], 'montant' :self.getAmount(df.iloc[u])}, ignore_index=True)
             self.listDf.append(df2)
-            #df.to_csv(r'toto.csv')
+        else:
+            df.to_csv(r'toto.csv')
+            input()
         #df.to_excel("output.xlsx") 
         #df2.to_excel("output2.xlsx")
         #to_OFX(df2, "output2.ofx")
