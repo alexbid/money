@@ -114,7 +114,7 @@ class pdf:
 
     def to_OFX(self, fyle_out):
         ofx = self.header()
-        for df in self.listDf():
+        for df in self.listDf:
             for i in range(len(df)) :
                 print(df.loc[i, "Label"], df.loc[i, "date_transaction"], df.loc[i, "date_valeur"], df.loc[i, "montant"])
                 ofx = ofx + self.ope_to_OFX(df.loc[i, "date_transaction"], df.loc[i, "Label"], df.loc[i, "montant"])
