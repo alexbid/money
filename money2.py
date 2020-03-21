@@ -21,7 +21,7 @@ class pdf:
             df2 = pd.DataFrame()
 
             for i in range(len(df)) :
-                print(df.loc[i+1])
+                print(df.loc[i])
                 if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']:
                     dates = self.getDate(df.loc[i, "Date"])
                     print(df.iloc[i]['index'], dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
