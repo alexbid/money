@@ -27,14 +27,14 @@ class pdf:
             elif 'Total des dépenses' in str(df.loc[i+1, "Date"]):
                 isTransaction=False
                 toPrint=False
-            elif getDate(df.loc[i+1, "Date"]) ==  ['NaN', 'NaN']: toPrint=False
+            elif self.getDate(df.loc[i+1, "Date"]) ==  ['NaN', 'NaN']: toPrint=False
             else: toPrint=True
 
             if isTransaction and toPrint:
                 u=i+1
-                dates = getDate(df.loc[u, "Date"])
-                print(df.iloc[u]['index'], dates[0], dates[1], df.loc[u, "Label"], getAmount(df.iloc[u]))
-                df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[u, "Label"], 'montant' :getAmount(df.iloc[u])}, ignore_index=True)
+                dates = self.getDate(df.loc[u, "Date"])
+                print(df.iloc[u]['index'], dates[0], dates[1], df.loc[u, "Label"], self.getAmount(df.iloc[u]))
+                df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[u, "Label"], 'montant' :self.getAmount(df.iloc[u])}, ignore_index=True)
 
         self.listDf.append(df2)
         #df.to_csv(r'toto.csv')
@@ -60,8 +60,8 @@ class pdf:
         val = str(lyne).split(' ')
         if ('Date de' not in str(lyne)) and ('rations pour' not in str(lyne)) and ('transaction' not in str(lyne)) and ('Carte xxxx' not in str(lyne)):
             if len(val) == 4:
-                date_stock=datetime.datetime(2020, getMonth(val[1]), int(val[0]))
-                date_valeur=datetime.datetime(2020, getMonth(val[3]), int(val[2]))
+                date_stock=datetime.datetime(2020, self.getMonth(val[1]), int(val[0]))
+                date_valeur=datetime.datetime(2020, self.getMonth(val[3]), int(val[2]))
                 return [date_stock.strftime("%m/%d/%Y"), date_valeur.strftime("%m/%d/%Y")]
             elif str(lyne) == 'nan': return ['NaN', 'NaN']
             elif len(val) > 4: return ['NaN', 'NaN']
@@ -108,12 +108,12 @@ class pdf:
         return buff
 
     def to_OFX(self, fyle_out):
-        ofx = header()
+        ofx = self.header()
         for df in self.listDf():
             for i in range(len(df)) :
                 print(df.loc[i, "Label"], df.loc[i, "date_transaction"], df.loc[i, "date_valeur"], df.loc[i, "montant"])
-                ofx = ofx + ope_to_OFX(df.loc[i, "date_transaction"], df.loc[i, "Label"], df.loc[i, "montant"])
-        ofx = tail(ofx)
+                ofx = ofx + self.ope_to_OFX(df.loc[i, "date_transaction"], df.loc[i, "Label"], df.loc[i, "montant"])
+        ofx = self.tail(ofx)
         
         fout1 = open(fyle_out, "w")
         fout1.write('\n'.join(ofx))
