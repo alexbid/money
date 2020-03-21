@@ -10,9 +10,7 @@ class pdf:
         self.listDf = []
         pages = tabula.read_pdf(pdf_name, pages='all')
         for page in pages: self.dealPage(page)
-
         self.to_OFX(pdf_name.replace('.pdf','.ofx'))
-
 
     def dealPage(self, df):
         df = df.reset_index()
@@ -24,14 +22,13 @@ class pdf:
                 print(df.loc[i])
                 if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']:
                     dates = self.getDate(df.loc[i, "Date"])
-                    print(df.iloc[i]['index'], dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
+                    # print(df.iloc[i]['index'], dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
                     df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
-
             self.listDf.append(df2)
-        else:
-            print("df.columns < 3")
-            df.to_csv(r'toto.csv')
-            input()
+        # else:
+            # print("df.columns < 3")
+            # df.to_csv(r'toto.csv')
+            # input()
         #df.to_excel("output.xlsx") 
         #df2.to_excel("output2.xlsx")
         #to_OFX(df2, "output2.ofx")
