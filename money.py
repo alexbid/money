@@ -16,28 +16,33 @@ class pdf:
 
     def dealPage(self, df):
         df = df.reset_index()
-        df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[9]: "Montant" }, inplace = True)
-        df2 = pd.DataFrame()
-        isTransaction=False
-        toPrint=True
-        for i in range(len(df)-1) :
-            if 'Carte xxxx' in str(df.loc[i, "Date"]):
-                isTransaction=True
-                toPrint=False
-            elif 'Total des dépenses' in str(df.loc[i+1, "Date"]):
-                isTransaction=False
-                toPrint=False
-            elif self.getDate(df.loc[i+1, "Date"]) ==  ['NaN', 'NaN']: toPrint=False
-            else: toPrint=True
 
-            if isTransaction and toPrint:
-                u=i+1
-                dates = self.getDate(df.loc[u, "Date"])
-                print(df.iloc[u]['index'], dates[0], dates[1], df.loc[u, "Label"], self.getAmount(df.iloc[u]))
-                df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[u, "Label"], 'montant' :self.getAmount(df.iloc[u])}, ignore_index=True)
+        if len(df.columns) < 9:
+            print(df.head())
+            input()
+        else:
+            df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[9]: "Montant" }, inplace = True)
+            df2 = pd.DataFrame()
+            isTransaction=False
+            toPrint=True
+            for i in range(len(df)-1) :
+                if 'Carte xxxx' in str(df.loc[i, "Date"]):
+                    isTransaction=True
+                    toPrint=False
+                elif 'Total des dépenses' in str(df.loc[i+1, "Date"]):
+                    isTransaction=False
+                    toPrint=False
+                elif self.getDate(df.loc[i+1, "Date"]) ==  ['NaN', 'NaN']: toPrint=False
+                else: toPrint=True
 
-        self.listDf.append(df2)
-        #df.to_csv(r'toto.csv')
+                if isTransaction and toPrint:
+                    u=i+1
+                    dates = self.getDate(df.loc[u, "Date"])
+                    print(df.iloc[u]['index'], dates[0], dates[1], df.loc[u, "Label"], self.getAmount(df.iloc[u]))
+                    df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[u, "Label"], 'montant' :self.getAmount(df.iloc[u])}, ignore_index=True)
+
+            self.listDf.append(df2)
+            #df.to_csv(r'toto.csv')
         #df.to_excel("output.xlsx") 
         #df2.to_excel("output2.xlsx")
         #to_OFX(df2, "output2.ofx")
