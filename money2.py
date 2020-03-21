@@ -19,24 +19,14 @@ class pdf:
         if len(df.columns) > 3:
             df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[-1]: "Montant" }, inplace = True)
             df2 = pd.DataFrame()
-            isTransaction=False
-            toPrint=True
-            for i in range(len(df)-1) :
-                print(df.loc[i+1])
-                if 'Carte xxxx' in str(df.loc[i, "Date"]):
-                    isTransaction=True
-                    toPrint=False
-                elif 'Total des dépenses' in str(df.loc[i+1, "Date"]):
-                    isTransaction=False
-                    toPrint=False
-                elif self.getDate(df.loc[i+1, "Date"]) ==  ['NaN', 'NaN']: toPrint=False
-                else: toPrint=True
 
-                if isTransaction and toPrint:
-                    u=i+1
+            for i in range(len(df)) :
+                print(df.loc[i+1])
+                if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']
                     dates = self.getDate(df.loc[u, "Date"])
-                    print(df.iloc[u]['index'], dates[0], dates[1], df.loc[u, "Label"], self.getAmount(df.iloc[u]))
-                    df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[u, "Label"], 'montant' :self.getAmount(df.iloc[u])}, ignore_index=True)
+                    print(df.iloc[i]['index'], dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
+                    df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
+
             self.listDf.append(df2)
         else:
             print("df.columns < 3")
