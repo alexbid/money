@@ -63,6 +63,9 @@ class pdf:
                 date_stock=datetime.datetime(2020, self.getMonth(val[1]), int(val[0]))
                 date_valeur=datetime.datetime(2020, self.getMonth(val[3]), int(val[2]))
                 return [date_stock.strftime("%m/%d/%Y"), date_valeur.strftime("%m/%d/%Y")]
+            elif len(val) == 2:
+                date_stock=datetime.datetime(2020, self.getMonth(val[1]), int(val[0]))
+                return [date_stock.strftime("%m/%d/%Y"), date_stock.strftime("%m/%d/%Y")]
             elif str(lyne) == 'nan': return ['NaN', 'NaN']
             elif len(val) > 4: return ['NaN', 'NaN']
             else:
