@@ -16,12 +16,8 @@ class pdf:
 
     def dealPage(self, df):
         df = df.reset_index()
-
-        if len(df.columns) < 9:
-            print(df.head())
-            input()
-        else:
-            df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[9]: "Montant" }, inplace = True)
+        if len(df.columns) > 3:
+            df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[-1]: "Montant" }, inplace = True)
             df2 = pd.DataFrame()
             isTransaction=False
             toPrint=True
@@ -40,7 +36,6 @@ class pdf:
                     dates = self.getDate(df.loc[u, "Date"])
                     print(df.iloc[u]['index'], dates[0], dates[1], df.loc[u, "Label"], self.getAmount(df.iloc[u]))
                     df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[u, "Label"], 'montant' :self.getAmount(df.iloc[u])}, ignore_index=True)
-
             self.listDf.append(df2)
             #df.to_csv(r'toto.csv')
         #df.to_excel("output.xlsx") 
