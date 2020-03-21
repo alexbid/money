@@ -15,22 +15,18 @@ class pdf:
     def dealPage(self, df):
         df = df.reset_index()
         if len(df.columns) > 3:
-            df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[-1]: "Montant" }, inplace = True)
+            df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[2]: "Label2", df.columns[-1]: "Montant" }, inplace = True)
             df2 = pd.DataFrame()
 
             for i in range(len(df)) :
                 if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']:
                     dates = self.getDate(df.loc[i, "Date"])
-                    # print(df.iloc[i]['index'], dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
-                    df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
+                    if self.getDate(df.loc[i, "Label"]) == ['NaN', 'NaN']:
+                        df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
+                    else:
+                        df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label2"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
+                    
             self.listDf.append(df2)
-        # else:
-            # print("df.columns < 3")
-            # df.to_csv(r'toto.csv')
-            # input()
-        #df.to_excel("output.xlsx") 
-        #df2.to_excel("output2.xlsx")
-        #to_OFX(df2, "output2.ofx")
 
     def getMonth(self, smonth):
         if smonth == "déc": return 12
@@ -111,7 +107,6 @@ class pdf:
         fout1 = open(fyle_out, "w")
         fout1.write('\n'.join(ofx))
         fout1.close()
-
 
 if __name__ == '__main__':
     ofx = pdf("test.pdf")
