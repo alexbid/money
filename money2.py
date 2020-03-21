@@ -22,8 +22,8 @@ class pdf:
 
             for i in range(len(df)) :
                 print(df.loc[i+1])
-                if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']
-                    dates = self.getDate(df.loc[u, "Date"])
+                if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']:
+                    dates = self.getDate(df.loc[i, "Date"])
                     print(df.iloc[i]['index'], dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
                     df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
 
