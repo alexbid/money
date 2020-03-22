@@ -24,10 +24,12 @@ class pdf:
                 if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']:
                     dates = self.getDate(df.loc[i, "Date"])
                     if self.getDate(df.loc[i, "Label"]) == ['NaN', 'NaN']:
+                        print(27)
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
                     else:
+                        print(30)
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label2"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
-                    
+                
             self.listDf.append(df2)
 
     def getMonth(self, smonth):
