@@ -20,23 +20,23 @@ class pdf:
             df2 = pd.DataFrame()
 
             for i in range(len(df)) :
-                print(22,df.loc[i])
                 if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']:
-                    print(24)
                     dates = self.getDate(df.loc[i, "Date"])
                     if self.getDate(df.loc[i, "Label"]) == ['NaN', 'NaN']:
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
+                        print(27,df.loc[i])
                         print(28, self.getDate(df.loc[i, "Label"]), dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
                     else:
-                        print(30, self.getDate(df.loc[i, "Label"]))
+                        print(30,df.loc[i])
+                        print(31, self.getDate(df.loc[i, "Label"]))
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
                 else:
-                    self.OperationFiltered.append(str(df.loc[i]))
                     # print(33, 'not considering this operation')
-                input()
+                    self.OperationFiltered.append(str(df.loc[i]))
             self.listDf.append(df2)
         else:
                     self.OperationFiltered.append(str(df.loc[i]))
+        input()
 
     def getMonth(self, smonth):
         if smonth == "déc": return 12
