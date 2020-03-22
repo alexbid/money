@@ -29,6 +29,8 @@ class pdf:
                     else:
                         print(30, self.getDate(df.loc[i, "Label"]))
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
+                else:
+                    print(33, 'not considering this operation')
                 input()
             self.listDf.append(df2)
 
