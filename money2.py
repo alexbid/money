@@ -54,8 +54,8 @@ class pdf:
         elif smonth == "fév": return 2
         elif len(smonth) > 3: return 'N/A'
         else:
-            print(37, smonth)
-            input()
+            # print(37, smonth)
+            # input()
             return 'N/A'
 
     def getAmount(self, lyne):
