@@ -34,7 +34,7 @@ class pdf:
         elif smonth == "fév": return 2
         elif len(smonth) > 3: return 'N/A'
         else:
-            print(smonth)
+            print(37, smonth)
             input()
             return 'N/A'
 
@@ -57,7 +57,7 @@ class pdf:
                 elif str(lyne) == 'nan': return ['NaN', 'NaN']
                 elif len(val) > 4: return ['NaN', 'NaN']
                 else:
-                    print(str(lyne))
+                    print(60, str(lyne))
                     input()
                     return ['Pop','Pop']
             except:
