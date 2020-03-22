@@ -15,7 +15,7 @@ class pdf:
     def dealPage(self, df):
         df = df.reset_index()
         if len(df.columns) > 3:
-            df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[2]: "Label2", df.columns[-1]: "Montant" }, inplace = True)
+            df.rename(columns={ df.columns[1]: "Date", df.columns[2]: "Label", df.columns[3]: "Label2", df.columns[-1]: "Montant" }, inplace = True)
             df2 = pd.DataFrame()
 
             for i in range(len(df)) :
