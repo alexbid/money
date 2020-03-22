@@ -19,6 +19,8 @@ class pdf:
             df2 = pd.DataFrame()
 
             for i in range(len(df)) :
+                print(22,df.loc[i])
+                print(23, '')
                 if self.getDate(df.loc[i, "Date"]) != ['NaN', 'NaN']:
                     dates = self.getDate(df.loc[i, "Date"])
                     if self.getDate(df.loc[i, "Label"]) == ['NaN', 'NaN']:
@@ -58,7 +60,7 @@ class pdf:
                 elif len(val) > 4: return ['NaN', 'NaN']
                 else:
                     print(60, str(lyne))
-                    input()
+                    # input()
                     return ['Pop','Pop']
             except:
                 return ['NaN', 'NaN']
