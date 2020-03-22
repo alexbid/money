@@ -33,7 +33,7 @@ class pdf:
                     elif self.getDate(df.loc[i, "Label2"]) == ['NaN', 'NaN']:
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label2"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
                         print(35,df.loc[i])
-                        print(36, self.getDate(df.loc[i, "Label2"]), dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
+                        print(36, self.getDate(df.loc[i, "Label2"]), dates[0], dates[1], df.loc[i, "Label2"], self.getAmount(df.iloc[i]))
                         input()
                     else:
                         print(39,df.loc[i])
@@ -70,10 +70,10 @@ class pdf:
                 if len(val) == 4:
                     date_stock=datetime.datetime(2020, self.getMonth(val[1]), int(val[0]))
                     date_valeur=datetime.datetime(2020, self.getMonth(val[3]), int(val[2]))
-                    return [date_stock.strftime("%m/%d/%Y"), date_valeur.strftime("%m/%d/%Y")]
+                    return [date_stock.strftime("%m/%d/%Y"), date_valeur.strftime("%d/%m/%Y")]
                 elif len(val) == 2:
                     date_stock=datetime.datetime(2020, self.getMonth(val[1]), int(val[0]))
-                    return [date_stock.strftime("%m/%d/%Y"), date_stock.strftime("%m/%d/%Y")]
+                    return [date_stock.strftime("%m/%d/%Y"), date_stock.strftime("%d/%m/%Y")]
                 elif str(lyne) == 'nan': return ['NaN', 'NaN']
                 elif len(val) > 4: return ['NaN', 'NaN']
                 else:
