@@ -41,7 +41,7 @@ class pdf:
             self.listDf.append(df2)
         # else:
                     # self.OperationFiltered.append(str(df.loc[i]))
-        input()
+        # input()
 
     def getMonth(self, smonth):
         if smonth == "déc": return 12
