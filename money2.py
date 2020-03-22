@@ -63,9 +63,8 @@ class pdf:
                 elif str(lyne) == 'nan': return ['NaN', 'NaN']
                 elif len(val) > 4: return ['NaN', 'NaN']
                 else:
-                    print(60, str(lyne))
-                    # input()
-                    return ['Pop','Pop']
+                    print(66, str(lyne))
+                    return ['NaN','NaN']
             except:
                 return ['NaN', 'NaN']
         else:
