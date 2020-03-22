@@ -32,6 +32,7 @@ class pdf:
         if smonth == "déc": return 12
         elif smonth == "jan": return 1
         elif smonth == "fév": return 2
+        elif len(smonth) > 3: return 'N/A'
         else:
             print(smonth)
             input()
