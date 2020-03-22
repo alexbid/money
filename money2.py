@@ -30,9 +30,14 @@ class pdf:
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
                         # print(27,df.loc[i])
                         # print(28, self.getDate(df.loc[i, "Label"]), dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
+                    elif self.getDate(df.loc[i, "Label2"]) == ['NaN', 'NaN']:
+                        df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label2"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
+                        print(35,df.loc[i])
+                        print(36, self.getDate(df.loc[i, "Label2"]), dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
+                        input()
                     else:
-                        print(30,df.loc[i])
-                        print(31, self.getDate(df.loc[i, "Label"]))
+                        print(39,df.loc[i])
+                        print(40, self.getDate(df.loc[i, "Label"]))
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
                         input()
                 else:
