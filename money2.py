@@ -8,6 +8,7 @@ class pdf:
     def __init__(self, pdf_name):
         # Read pdf into list of DataFrame
         self.listDf = []
+        self.OperationFiltered = []
         pages = tabula.read_pdf(pdf_name, pages='all')
         for page in pages: self.dealPage(page)
         self.to_OFX(pdf_name.replace('.pdf','.ofx'))
@@ -30,9 +31,12 @@ class pdf:
                         print(30, self.getDate(df.loc[i, "Label"]))
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
                 else:
-                    print(33, 'not considering this operation')
+                    self.OperationFiltered.append(str(df.loc[i]))
+                    # print(33, 'not considering this operation')
                 input()
             self.listDf.append(df2)
+        else:
+                    self.OperationFiltered.append(str(df.loc[i]))
 
     def getMonth(self, smonth):
         if smonth == "déc": return 12
