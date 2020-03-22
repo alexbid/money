@@ -13,6 +13,10 @@ class pdf:
         for page in pages: self.dealPage(page)
         self.to_OFX(pdf_name.replace('.pdf','.ofx'))
 
+        fout1 = open('filtered', "w")
+        fout1.write('\n'.join(self.OperationFiltered))
+        fout1.close()
+
     def dealPage(self, df):
         df = df.reset_index()
         if len(df.columns) > 4:
@@ -24,18 +28,19 @@ class pdf:
                     dates = self.getDate(df.loc[i, "Date"])
                     if self.getDate(df.loc[i, "Label"]) == ['NaN', 'NaN']:
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
-                        print(27,df.loc[i])
-                        print(28, self.getDate(df.loc[i, "Label"]), dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
+                        # print(27,df.loc[i])
+                        # print(28, self.getDate(df.loc[i, "Label"]), dates[0], dates[1], df.loc[i, "Label"], self.getAmount(df.iloc[i]))
                     else:
                         print(30,df.loc[i])
                         print(31, self.getDate(df.loc[i, "Label"]))
                         df2 = df2.append({'date_transaction' : dates[0], 'date_valeur' : dates[1], 'Label' : df.loc[i, "Label"], 'montant' :self.getAmount(df.iloc[i])}, ignore_index=True)
+                        input()
                 else:
                     # print(33, 'not considering this operation')
                     self.OperationFiltered.append(str(df.loc[i]))
             self.listDf.append(df2)
-        else:
-                    self.OperationFiltered.append(str(df.loc[i]))
+        # else:
+                    # self.OperationFiltered.append(str(df.loc[i]))
         input()
 
     def getMonth(self, smonth):
@@ -67,7 +72,7 @@ class pdf:
                 elif str(lyne) == 'nan': return ['NaN', 'NaN']
                 elif len(val) > 4: return ['NaN', 'NaN']
                 else:
-                    print(66, str(lyne))
+                    # print(70, str(lyne))
                     return ['NaN','NaN']
             except:
                 return ['NaN', 'NaN']
@@ -113,7 +118,7 @@ class pdf:
         ofx = self.header()
         for df in self.listDf:
             for i in range(len(df)) :
-                print(df.loc[i, "Label"], df.loc[i, "date_transaction"], df.loc[i, "date_valeur"], df.loc[i, "montant"])
+                print('to_OFX', df.loc[i, "date_transaction"], , df.loc[i, "date_valeur"], df.loc[i, "Label"], df.loc[i, "montant"])
                 ofx = ofx + self.ope_to_OFX(df.loc[i, "date_transaction"], df.loc[i, "Label"], df.loc[i, "montant"])
         ofx = self.tail(ofx)
         
