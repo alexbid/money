@@ -3,6 +3,9 @@
 import tabula
 import datetime
 import pandas as pd
+import os
+
+pid = os.getpid()
 
 class pdf:
     def __init__(self, pdf_name):
@@ -94,7 +97,7 @@ class pdf:
         dd = val[0].strip()
         buff.append('<DTPOSTED>' + str(yyyy) + str(mm) + str(dd))
         buff.append('<TRNAMT>' + str(montant))
-        buff.append('<FITID>')
+        buff.append('<FITID>' + str(pid))
         buff.append('<NAME>' + str(label))
         buff.append('</STMTTRN>')
         return buff
