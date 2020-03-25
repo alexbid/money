@@ -129,7 +129,7 @@ class pdf:
                 ofx = self.header()
                 ofx = ofx + self.ope_to_OFX(df.loc[i, "date_transaction"], df.loc[i, "Label"], df.loc[i, "montant"])
                 ofx = self.tail(ofx)
-                fout1 = open(fyle_out + '_' + str(i), "w")
+                fout1 = open(fyle_out.split('.')[0] + '_' + str(i) + '.ofx', "w")
                 fout1.write('\n'.join(ofx))
                 fout1.close()
 
