@@ -4,6 +4,7 @@ import tabula
 import datetime
 import pandas as pd
 import os
+import unicodedata
 import random
 
 pid = os.getpid()
@@ -89,7 +90,8 @@ class pdf:
 
     def ope_to_OFX(self, date_transaction, label, montant):
         deco = random.randrange(0, 101, 2)
-
+        label = unicodedata.normalize('NFKD', label).encode('ASCII', 'ignore')
+        
         buff = []
         buff.append('<STMTTRN>')
         if montant > 0: buff.append('<TRNTYPE>DEBIT')
