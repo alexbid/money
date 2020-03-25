@@ -90,7 +90,7 @@ class pdf:
 
     def ope_to_OFX(self, date_transaction, label, montant):
         deco = random.randrange(0, 101, 2)
-        label = unicodedata.normalize('NFKD', label).encode('ASCII', 'ignore').decode('ASCII')
+        label = unicodedata.normalize('NFKD', label).encode('ASCII', 'ignore').decode('ASCII').replace('&','')
         
         buff = []
         buff.append('<STMTTRN>')
