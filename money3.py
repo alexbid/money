@@ -98,7 +98,7 @@ class pdf:
         buff.append('<DTPOSTED>' + str(yyyy) + str(mm) + str(dd))
         buff.append('<TRNAMT>' + str(montant))
         buff.append('<FITID>' + str(pid))
-        buff.append('<NAME>' + str(label))
+        buff.append('<NAME>' + str(label.replace('é','e').replace('è','e')))
         buff.append('</STMTTRN>')
         return buff
 
