@@ -59,6 +59,7 @@ class pdf:
         elif smonth == "fév": return 2
         elif smonth == "mars": return 3
         elif smonth == "avril": return 4
+        elif smonth == "avr": return 4
         elif smonth == "mai": return 5
         elif smonth == "juin": return 6
         elif len(smonth) > 3: return 'N/A'
