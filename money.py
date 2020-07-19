@@ -63,7 +63,7 @@ class pdf:
         elif smonth == "mai": return 5
         elif smonth == "juin": return 6
         elif smonth == 'juil': return 7
-	elif len(smonth) > 3: return 'N/A'
+        elif len(smonth) > 3: return 'N/A'
         else:
             # print(37, smonth)
             # input()
