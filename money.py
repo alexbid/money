@@ -101,8 +101,8 @@ class pdf:
         
         buff = []
         buff.append('<STMTTRN>')
-        if montant > 0: buff.append('<TRNTYPE>DEBIT')
-        else: buff.append('<TRNTYPE>CREDIT')
+        if montant > 0: buff.append('<TRNTYPE>CREDIT')
+        else: buff.append('<TRNTYPE>DEBIT')
         val = date_transaction.split('/')
         yyyy = val[2].strip()
         mm = val[1].strip()
